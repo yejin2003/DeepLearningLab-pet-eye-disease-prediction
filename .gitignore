@@ -1,0 +1,34 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+~$*
+.vscode/
+.idea/
+
+# Large raw data (AIHub 원본 201GB)
+153.반려동물 안구질환 데이터/
+
+# Archives
+*.zip
+
+# Model weights (각 ~16MB — Git LFS 없이 업로드 불가)
+project/outputs/*.pt
+
+# Django runtime
+project/webapp/db.sqlite3
+project/webapp/media/
+
+# Build outputs
+outputs/
+node_modules/
+
+# Deliverables (제출용 폴더는 별도 관리)
+deliverables/

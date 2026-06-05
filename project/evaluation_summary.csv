@@ -1,0 +1,11 @@
+disease_key,disease_name,accuracy,precision,recall,f1_score
+conjunctivitis,결막염,0.9833,0.9793,0.9875,0.9834
+blepharitis,안검염,0.9966,1.0000,0.9932,0.9966
+epiphora,유루증,0.9944,0.9890,1.0000,0.9945
+sclerosis,핵경화,0.9972,0.9945,1.0000,0.9972
+cataract,백내장,1.0000,1.0000,1.0000,1.0000
+ulcerative_keratitis,궤양성 각막질환,1.0000,1.0000,1.0000,1.0000
+non_ulcerative_keratitis,비궤양성 각막질환,1.0000,1.0000,1.0000,1.0000
+pigmentary_keratitis,색소침착성 각막염,1.0000,1.0000,1.0000,1.0000
+entropion,안검내반증,0.9890,0.9787,1.0000,0.9890
+eyelid_tumor,안검종양,0.9887,1.0000,0.9770,0.9884

@@ -1,0 +1,14 @@
+﻿model_file,size_mb,modified
+best_blepharitis_efficientnet_b0.pt,15.59,1779896322.7311337
+best_cataract_efficientnet_b0.pt,15.59,1779897108.6753302
+best_conjunctivitis_efficientnet_b0.pt,15.59,1779893340.1596282
+best_dog_general_abnormal_efficientnet_b0.pt,25.61,1779904496.3585348
+best_entropion_efficientnet_b0.pt,15.59,1779905445.0430572
+best_epiphora_efficientnet_b0.pt,15.59,1779896452.5325096
+best_eye_disease_type_efficientnet_b0.pt,18.1,1780229909.829226
+best_eye_multiclass_efficientnet_b0.pt,25.68,1780219245.2366168
+best_eyelid_tumor_efficientnet_b0.pt,15.59,1779905609.7128172
+best_non_ulcerative_keratitis_efficientnet_b0.pt,15.6,1779905094.8627727
+best_pigmentary_keratitis_efficientnet_b0.pt,15.59,1779905245.8353155
+best_sclerosis_efficientnet_b0.pt,15.59,1779896730.3657396
+best_ulcerative_keratitis_efficientnet_b0.pt,15.59,1779904886.2911694

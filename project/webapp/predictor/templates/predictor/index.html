@@ -1,0 +1,157 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>반려동물 안구 질환 예측</title>
+  <link rel="stylesheet" href="{% static 'predictor/styles.css' %}">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="workspace">
+      <div class="panel upload-panel">
+        <div class="kicker">Pet Eye AI</div>
+        <h1>반려동물 안구 질환 의심 예측</h1>
+        <p class="panel-note">눈이 선명하게 보이는 사진을 넣으면 AIHub 기반 모델이 주요 안구 질환 의심도를 분석합니다.</p>
+        <form method="post" enctype="multipart/form-data" class="upload-form">
+          {% csrf_token %}
+          <label class="file-drop">
+            <input id="image-input" type="file" name="image" accept="image/png,image/jpeg" required>
+            <span id="file-title" class="file-title">눈 이미지 선택</span>
+            <span class="file-meta">JPG, JPEG, PNG</span>
+          </label>
+          <button type="submit">예측 실행</button>
+        </form>
+        <div class="model-strip">
+          <div>
+            <span>Model</span>
+            <strong>{{ model_name }}</strong>
+          </div>
+          <div>
+            <span>Disease</span>
+            <strong>{{ supported_disease_count }}</strong>
+          </div>
+          <div>
+            <span>Test F1</span>
+            <strong>{{ metric_f1 }}</strong>
+          </div>
+        </div>
+        {% if error %}
+          <p class="error">{{ error }}</p>
+        {% endif %}
+      </div>
+
+      <div class="panel result-panel">
+        {% if result %}
+          <div class="preview-wrap">
+            <img data-preview-image src="{{ result.image_url }}" alt="업로드된 반려동물 눈 이미지">
+          </div>
+          <div id="pending-state" class="pending-state" hidden>
+            <h2>예측 대기</h2>
+            <p>새 이미지가 선택되었습니다. 예측 실행을 누르면 분석이 시작됩니다.</p>
+          </div>
+          <div class="result-copy" data-result-content>
+            <span class="risk-badge">{{ result.risk_level }}</span>
+            <span class="score-label">종합 의심도</span>
+            <h2>{{ result.overall_percent }}%</h2>
+            <h3>주요 후보: {{ result.top_disease_name }} {{ result.top_percent }}%</h3>
+            <p>{{ result.advice }}</p>
+            <p class="sub-note">{{ result.quality_advice }}</p>
+          </div>
+          <div class="quality-card" data-result-content>
+            <div class="section-heading">
+              <span>이미지 품질 확인</span>
+              <strong>{{ result.quality.summary }} · {{ result.quality.passed }}/{{ result.quality.total }}</strong>
+            </div>
+            <div class="quality-list">
+              {% for check in result.quality.checks %}
+                <div class="quality-item {% if check.ok %}ok{% else %}warn{% endif %}">
+                  <span>{{ check.label }}</span>
+                  <strong>{{ check.status }}</strong>
+                  <p>{{ check.message }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="probability-list" data-result-content>
+            <div class="section-heading compact">
+              <span>상위 3개 질환 후보</span>
+              <strong>softmax probability</strong>
+            </div>
+            {% for disease in result.diseases %}
+              <div class="probability-row">
+                <div class="row-head">
+                  <span>{{ disease.disease_name }}</span>
+                  <strong>{{ disease.percent }}%</strong>
+                </div>
+                <div class="bar {% if forloop.counter > 1 %}muted{% endif %}">
+                  <span style="width: {{ disease.percent }}%"></span>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class="info-grid" data-result-content>
+            <section>
+              <h4>{{ result.top_disease_name }} 설명</h4>
+              <p>{{ result.description }}</p>
+            </section>
+            <section>
+              <h4>예방법 및 관리</h4>
+              <p>{{ result.prevention }}</p>
+            </section>
+          </div>
+          <p class="disclaimer" data-result-content>{{ result.interpretation_note }}</p>
+        {% else %}
+          <div class="empty-state">
+            <div id="empty-preview-frame" class="empty-frame">
+              <img data-preview-image id="empty-preview-image" alt="선택한 반려동물 눈 이미지 미리보기">
+            </div>
+            <h2 id="empty-state-title">분석 대기</h2>
+            <p class="empty-copy">이미지를 선택하면 이 영역에 미리보기가 표시됩니다.</p>
+          </div>
+        {% endif %}
+      </div>
+    </section>
+  </main>
+  <script>
+    const imageInput = document.querySelector("#image-input");
+    const fileTitle = document.querySelector("#file-title");
+    const previewImages = document.querySelectorAll("[data-preview-image]");
+    const resultContent = document.querySelectorAll("[data-result-content]");
+    const emptyFrame = document.querySelector("#empty-preview-frame");
+    const emptyTitle = document.querySelector("#empty-state-title");
+    const pendingState = document.querySelector("#pending-state");
+    let previewUrl = null;
+
+    imageInput?.addEventListener("change", () => {
+      const file = imageInput.files?.[0];
+      if (!file) return;
+
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl);
+      }
+
+      previewUrl = URL.createObjectURL(file);
+      previewImages.forEach((image) => {
+        image.src = previewUrl;
+        image.classList.add("is-visible");
+      });
+
+      emptyFrame?.classList.add("has-preview");
+      resultContent.forEach((element) => {
+        element.hidden = true;
+      });
+      if (pendingState) {
+        pendingState.hidden = false;
+      }
+      if (emptyTitle) {
+        emptyTitle.textContent = "예측 대기";
+      }
+      if (fileTitle) {
+        fileTitle.textContent = file.name;
+      }
+    });
+  </script>
+</body>
+</html>

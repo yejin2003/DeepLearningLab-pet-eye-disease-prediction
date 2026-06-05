@@ -1,0 +1,14 @@
+﻿csv_file,purpose,total_samples,train,val,test,label_summary
+blepharitis_dataset.csv,blepharitis,1965,1374,295,296,유:984; 무:981
+cataract_dataset.csv,cataract,5462,3822,820,820,무:1877; 유:1010; 비성숙:872; 초기:861; 성숙:842
+conjunctivitis_dataset.csv,conjunctivitis,3186,2229,478,479,유:1599; 무:1587
+dog_general_abnormal_dataset.csv,dog_general_abnormal,22058,15440,3308,3310,abnormal:12595; normal:9463
+entropion_dataset.csv,entropion,2424,1696,364,364,유:1224; 무:1200
+epiphora_dataset.csv,epiphora,2396,1677,359,360,무:1200; 유:1196
+eye_disease_type_dataset.csv,eye_disease_type,14127,9884,2120,2123,백내장:3585; 궤양성 각막질환:1727; 결막염:1599; 안검내반증:1224; 핵경화:1198; 유루증:1196; 비궤양성 각막질환:1186; 안검염:984; 색소침착성 각막염:852; 안검종양:576
+eye_multiclass_dataset.csv,eye_multiclass,25113,17574,3768,3771,정상:10986; 백내장:3585; 궤양성 각막질환:1727; 결막염:1599; 안검내반증:1224; 핵경화:1198; 유루증:1196; 비궤양성 각막질환:1186; 안검염:984; 색소침착성 각막염:852; 안검종양:576
+eyelid_tumor_dataset.csv,eyelid_tumor,1176,823,176,177,무:600; 유:576
+non_ulcerative_keratitis_dataset.csv,non_ulcerative_keratitis,1786,1250,268,268,상:615; 무:600; 하:571
+pigmentary_keratitis_dataset.csv,pigmentary_keratitis,1732,1212,260,260,무:880; 유:852
+sclerosis_dataset.csv,sclerosis,2399,1678,360,361,무:1201; 유:1198
+ulcerative_keratitis_dataset.csv,ulcerative_keratitis,2587,1810,388,389,상:866; 하:861; 무:860
