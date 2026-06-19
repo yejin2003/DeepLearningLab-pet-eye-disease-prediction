@@ -1,14 +1,18 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 PROJECT_DIR = BASE_DIR.parent
 
-SECRET_KEY = "pet-eye-disease-final-project-dev-key"
-DEBUG = True
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+SECRET_KEY = os.environ.get("SECRET_KEY", "pet-eye-disease-final-project-dev-key")
+DEBUG = os.environ.get("DEBUG", "True") == "True"
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",") + ["*"]
+
+# Hugging Face Spaces(https://*.hf.space)에서 폼 제출(POST) 시 CSRF 차단 방지
+CSRF_TRUSTED_ORIGINS = ["https://*.hf.space"]
 
 INSTALLED_APPS = [
     "django.contrib.staticfiles",
@@ -17,6 +21,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
 ]
@@ -52,6 +57,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 

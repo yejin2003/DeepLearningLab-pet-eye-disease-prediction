@@ -30,10 +30,35 @@ from disease_definitions import DISEASES  # noqa: E402
 from image_quality import check_image_quality  # noqa: E402
 
 
+import os
+
 MODEL_DIR = PROJECT_DIR / "outputs"
 MULTICLASS_MODEL_PATH = MODEL_DIR / "best_eye_multiclass_efficientnet_b0.pt"
 DATA_ROOT = PROJECT_DIR.parent / "153.반려동물 안구질환 데이터"
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png"}
+
+# HuggingFace Hub에서 모델 자동 다운로드
+HF_REPO_ID = os.environ.get("HF_REPO_ID", "yejin2003/pet-eye-disease-models")
+
+def ensure_models_downloaded():
+    """배포 환경에서 .pt 모델이 없으면 HuggingFace Hub에서 다운로드"""
+    if MULTICLASS_MODEL_PATH.exists():
+        return
+    try:
+        from huggingface_hub import hf_hub_download
+        MODEL_DIR.mkdir(parents=True, exist_ok=True)
+        print(f"[pet-eye] Downloading model from {HF_REPO_ID} ...")
+        hf_hub_download(
+            repo_id=HF_REPO_ID,
+            filename="best_eye_multiclass_efficientnet_b0.pt",
+            local_dir=str(MODEL_DIR),
+        )
+        print("[pet-eye] Model downloaded successfully.")
+    except Exception as e:
+        print(f"[pet-eye] Model download failed: {e}")
+
+# 서버 시작 시 모델 다운로드 실행
+ensure_models_downloaded()
 
 _MODELS = None
 _TRANSFORM = None

@@ -32,3 +32,12 @@ node_modules/
 
 # Deliverables (제출용 폴더는 별도 관리)
 deliverables/
+
+# 참고 문서 / 로컬 전용 파일 (GitHub에 불필요)
+*.pdf
+package.json
+upload_models_to_hf.py
+
+# 내부 메모
+project/SUBMISSION_GUIDE.md
+project/GITHUB_UPLOAD_GUIDE.md

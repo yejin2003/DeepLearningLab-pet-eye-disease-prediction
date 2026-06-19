@@ -1,0 +1,24 @@
+.venv/
+venv/
+__pycache__/
+*.pyc
+node_modules/
+.git/
+.gitattributes
+153.반려동물 안구질환 데이터/
+AI 모델 소스코드/
+deliverables/
+outputs/
+*.pdf
+*.zip
+project/webapp/db.sqlite3
+project/webapp/media/
+project/outputs/*.pt
+package.json
+package-lock.json
+upload_models_to_hf.py
+railway.json
+Procfile
+README.md
+project/SUBMISSION_GUIDE.md
+project/GITHUB_UPLOAD_GUIDE.md

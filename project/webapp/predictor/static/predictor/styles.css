@@ -477,6 +477,34 @@ button:hover {
   }
 }
 
+.photo-guide {
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.photo-guide .guide-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 0 0 8px 0;
+}
+
+.photo-guide ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+}
+
+.photo-guide li {
+  font-size: 13px;
+  color: var(--ink);
+}
+
 @media (max-width: 860px) {
   .app-shell {
     padding: 16px;
