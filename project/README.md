@@ -50,6 +50,12 @@ AIHub `반려동물 안구 질환 데이터`와 **EfficientNet-B0 전이학습**
 
 ## 실행 방법
 
+### 0. 배포된 웹 서비스로 바로 사용하기 (권장)
+
+설치 없이 바로 사용해볼 수 있습니다.
+
+🔗 **https://yejin2003-pet-eye-disease-prediction.hf.space**
+
 ### 1. 환경 설치
 
 ```bash
@@ -75,6 +81,8 @@ python project/webapp/manage.py runserver 127.0.0.1:8000
 또는 Windows에서 루트의 `run_webapp.bat`를 더블클릭합니다.
 
 브라우저 접속: **http://127.0.0.1:8000/**
+
+> 로컬 설치 없이 바로 확인하려면 위 [배포된 웹 서비스](https://yejin2003-pet-eye-disease-prediction.hf.space)를 이용하세요.
 
 ## API 사용 방법
 
